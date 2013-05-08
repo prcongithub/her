@@ -97,7 +97,7 @@ module Her
             define_method(name) { |*args| instance_exec(*args, &code) }
           end
         end
-
+        
         # @private
         def scoped
           @_her_default_scope || blank_relation
@@ -127,6 +127,14 @@ module Her
               scoped.send(#{method.to_sym.inspect}, *params)
             end
           RUBY
+        end
+        
+        def page(page)
+          scoped.send(:page,page)
+        end
+        
+        def per(per_page)
+          scoped.send(:per,per_page)
         end
 
         # Save an existing resource and return it

@@ -37,6 +37,22 @@ module Her
         end
       end
       alias all where
+      
+      def page(num)
+      	return self if num.nil?
+        self.clone.tap do |r|
+          r.params = r.params.merge({:page => num})
+          r.clear_fetch_cache!
+        end
+      end
+      
+      def per(num)
+      	return self if num.nil?
+        self.clone.tap do |r|
+          r.params = r.params.merge({:per => num})
+          r.clear_fetch_cache!
+        end
+      end
 
       # Bubble all methods to the fetched collection
       #
